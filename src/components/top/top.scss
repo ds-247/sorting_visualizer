@@ -1,0 +1,15 @@
+.top{
+    width: 92%;
+    height: 39px;
+    background-color: pink;
+    margin: 16px auto;
+}
+
+.top > :first-child{
+    margin-left: 10%;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 50px;
+}

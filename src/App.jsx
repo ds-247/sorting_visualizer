@@ -1,10 +1,17 @@
-import "./App.css";
+import FirstSection from "./components/first-section/FirstSection";
+import SecondSection from "./components/second-section/SecondSection";
+import "./App.scss";
 
 function App() {
   return (
-    <>
-      <p className="read-the-docs">Hello world</p>
-    </>
+    <div className="container">
+      <section>
+        <FirstSection />
+      </section>
+      <section>
+        <SecondSection />
+      </section>
+    </div>
   );
 }
 
