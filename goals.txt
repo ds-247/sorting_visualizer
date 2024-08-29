@@ -1,0 +1,7 @@
+1.  includes visual bar graph representing the array values
+2. provide color to the sorted array's value and different color to the values which are being compared
+3. take reference from youtube video for ui
+4. add option to generate random values (to make new random arrays)
+5. add button or dropdown for visualizing different sorting algos containing option of all sorting algos
+6. add option to include negative values or not in the array
+7. also add option to tell time required for different algo for sorting array of given size 
