@@ -1,0 +1,16 @@
+.bar-chart {
+  display: flex;
+  align-items: flex-end; /* Aligns bars to the bottom */
+  gap: 3px; /* Adds space between bars */
+  height: 300px; /* Set a fixed height for the chart */
+  padding: 10px; /* Optional: Adds padding around the bars */
+}
+
+.bar {
+  width: 5px; /* Fixed width for each bar */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
