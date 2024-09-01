@@ -12,7 +12,7 @@ const data = [
   23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3, 142, 23, 22, 23, 42, 43,
   200, 122, 13, 42, 56, 127, 76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13,
   42, 56, 127, 76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127,
-  76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3
+  76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3,
 ];
 
 export default function FirstSection() {
@@ -26,80 +26,125 @@ export default function FirstSection() {
   }
 
   function handleClick() {
-    // quickSort();
+    quick_sort(0, data.length-1, data);
     // merge_sort(0, data.length-1, data);
     // selectionSort(data);
-    // insertionSort(data);  
-    bubbleSort(data);
+    // insertionSort(data);
+    // bubbleSort(data);
   }
 
-async function merge_sort(lo, hi, data) {
-  if (lo < hi) {
-    let mid = Math.floor(lo + (hi - lo) / 2);
+  async function quick_sort(lo, hi, data) {
+    if(lo<hi){
+      let pivot_ind = await partition(lo, hi, data);
 
-    // Visualize current boundaries
-    setComp1(lo); // Highlight left boundary
-    await sleep();
-    setComp2(hi); // Highlight right boundary
-    await sleep();
-
-    // Sort first and second halves
-    await merge_sort(lo, mid, data);
-    await sleep();
-    await merge_sort(mid + 1, hi, data);
-    await sleep();
-
-    // Merge the two halves
-    await merge(lo, mid, hi, data);
-    await sleep();
-  }
-}
-
-async function merge(left, mid, right, data) {
-  let temp_arr = [];
-
-  let left_ind = left;
-  let right_ind = mid + 1;
-
-  // Merge the two subarrays
-  while (left_ind <= mid && right_ind <= right) {
-    if (data[left_ind] <= data[right_ind]) {
-      temp_arr.push(data[left_ind++]);
-    } else {
-      temp_arr.push(data[right_ind++]);
+      await quick_sort(lo, pivot_ind-1, data);
+      await quick_sort(pivot_ind+1, hi, data);
     }
   }
 
-  // Copy any remaining elements of the left subarray
-  while (left_ind <= mid) temp_arr.push(data[left_ind++]);
+  async function partition(lo, hi, data) {
+    let pivot = lo;
+    let left = lo + 1;
+    let right = hi;
 
-  // Copy any remaining elements of the right subarray
-  while (right_ind <= right) temp_arr.push(data[right_ind++]);
+    while (left <= right) {
+      while (left <=right && data[left] <= data[pivot]) {
+        left++;
+        setComp1(left);
+      await sleep();
+      }
+      while (left<=right && data[right] > data[pivot]) {
+        right--;
 
-  // Copy the merged elements back into the original array
-  for (let i = 0; i < temp_arr.length; i++) {
-    data[left + i] = temp_arr[i];
+        setComp2(right);
+        await sleep();
+      }
+
+      if (left < right) {
+        let temp = data[left];
+        data[left] = data[right];
+        data[right] = temp;
+
+        setArr(data);
+        await sleep();
+      }
+    }
+
+    let temp = data[right];
+    data[right] = data[pivot];
+    data[pivot] = temp;
+
+    await sleep();
+
+    return right;
   }
 
-  // Visualize the updated array
-  setArr([...data]); // Use spread operator to ensure state updates correctly
-  await sleep();
-}
+  async function merge_sort(lo, hi, data) {
+    if (lo < hi) {
+      let mid = Math.floor(lo + (hi - lo) / 2);
 
+      // Visualize current boundaries
+      setComp1(lo); // Highlight left boundary
+      await sleep();
+      setComp2(hi); // Highlight right boundary
+      await sleep();
 
- async   function insertionSort(data) {
+      // Sort first and second halves
+      await merge_sort(lo, mid, data);
+      await sleep();
+      await merge_sort(mid + 1, hi, data);
+      await sleep();
+
+      // Merge the two halves
+      await merge(lo, mid, hi, data);
+      await sleep();
+    }
+  }
+
+  async function merge(left, mid, right, data) {
+    let temp_arr = [];
+
+    let left_ind = left;
+    let right_ind = mid + 1;
+
+    // Merge the two subarrays
+    while (left_ind <= mid && right_ind <= right) {
+      if (data[left_ind] <= data[right_ind]) {
+        temp_arr.push(data[left_ind++]);
+      } else {
+        temp_arr.push(data[right_ind++]);
+      }
+    }
+
+    // Copy any remaining elements of the left subarray
+    while (left_ind <= mid) temp_arr.push(data[left_ind++]);
+
+    // Copy any remaining elements of the right subarray
+    while (right_ind <= right) temp_arr.push(data[right_ind++]);
+
+    // Copy the merged elements back into the original array
+    for (let i = 0; i < temp_arr.length; i++) {
+      data[left + i] = temp_arr[i];
+    }
+
+    // Visualize the updated array
+    setArr([...data]); // Use spread operator to ensure state updates correctly
+    await sleep();
+  }
+
+  async function insertionSort(data) {
     for (let i = 0; i < data.length; i++) {
-      let j = i-1;
+      let j = i - 1;
       let value = data[i];
       while (j >= 0 && data[j] >= value) {
-         let val = data[j];
-         data[j] = data[j+1];
-         data[j+1] = val;
+        let val = data[j];
+        data[j] = data[j + 1];
+        data[j + 1] = val;
         j--;
         setComp1(j);
         await sleep();
-        setComp2(j+1);
-        await sleep()
+        setComp2(j + 1);
+        await sleep();
       }
     }
     setArr(data);
@@ -141,8 +186,6 @@ async function merge(left, mid, right, data) {
       await sleep();
     }
   }
-
-  
 
   return (
     <div className="first">
