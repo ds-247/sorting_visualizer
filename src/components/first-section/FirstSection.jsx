@@ -10,25 +10,82 @@ const algos = ["Option 1", "Option 2", "Option 3"];
 const data = [
   142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3, 142, 23, 22,
   23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3, 142, 23, 22, 23, 42, 43,
-  200, 122, 13, 42, 56, 127, 76, 54, 3,
+  200, 122, 13, 42, 56, 127, 76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13,
+  42, 56, 127, 76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127,
+  76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3
 ];
 
 export default function FirstSection() {
   const [comp1, setComp1] = useState(0);
   const [comp2, setComp2] = useState(0);
   const [arr, setArr] = useState(data);
+  const ms = 5;
 
-  function sleep(ms) {
+  function sleep() {
     return new Promise((res) => setTimeout(res, ms));
   }
 
   function handleClick() {
     // quickSort();
-    // mergeSort();
-    selectionSort(data);
-    // insertionSort(data);
-    // bubbleSort(data);
+    // merge_sort(0, data.length-1, data);
+    // selectionSort(data);
+    // insertionSort(data);  
+    bubbleSort(data);
   }
+
+async function merge_sort(lo, hi, data) {
+  if (lo < hi) {
+    let mid = Math.floor(lo + (hi - lo) / 2);
+
+    // Visualize current boundaries
+    setComp1(lo); // Highlight left boundary
+    await sleep();
+    setComp2(hi); // Highlight right boundary
+    await sleep();
+
+    // Sort first and second halves
+    await merge_sort(lo, mid, data);
+    await sleep();
+    await merge_sort(mid + 1, hi, data);
+    await sleep();
+
+    // Merge the two halves
+    await merge(lo, mid, hi, data);
+    await sleep();
+  }
+}
+
+async function merge(left, mid, right, data) {
+  let temp_arr = [];
+
+  let left_ind = left;
+  let right_ind = mid + 1;
+
+  // Merge the two subarrays
+  while (left_ind <= mid && right_ind <= right) {
+    if (data[left_ind] <= data[right_ind]) {
+      temp_arr.push(data[left_ind++]);
+    } else {
+      temp_arr.push(data[right_ind++]);
+    }
+  }
+
+  // Copy any remaining elements of the left subarray
+  while (left_ind <= mid) temp_arr.push(data[left_ind++]);
+
+  // Copy any remaining elements of the right subarray
+  while (right_ind <= right) temp_arr.push(data[right_ind++]);
+
+  // Copy the merged elements back into the original array
+  for (let i = 0; i < temp_arr.length; i++) {
+    data[left + i] = temp_arr[i];
+  }
+
+  // Visualize the updated array
+  setArr([...data]); // Use spread operator to ensure state updates correctly
+  await sleep();
+}
+
 
  async   function insertionSort(data) {
     for (let i = 0; i < data.length; i++) {
@@ -40,9 +97,9 @@ export default function FirstSection() {
          data[j+1] = val;
         j--;
         setComp1(j);
-        await sleep(10);
+        await sleep();
         setComp2(j+1);
-        await sleep(10)
+        await sleep()
       }
     }
     setArr(data);
@@ -57,11 +114,11 @@ export default function FirstSection() {
           let val = data[j];
           data[j] = data[j + 1];
           data[j + 1] = val;
-          await sleep(20);
+          await sleep();
         }
       }
       setArr(data);
-      await sleep(20);
+      await sleep();
     }
   }
 
@@ -74,16 +131,14 @@ export default function FirstSection() {
           setComp1(minInd);
         }
         setComp2(j);
-        await sleep(10);
+        await sleep();
       }
       let val = data[minInd];
       data[minInd] = data[i];
       data[i] = val;
-      console.log("before");
       setComp1(Math.min(data.length - 1, i + 1));
       setArr(data);
-      await sleep(10);
-      console.log("after");
+      await sleep();
     }
   }
 
