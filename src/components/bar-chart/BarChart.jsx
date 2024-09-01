@@ -1,6 +1,6 @@
 import "./bar.scss";
 
-export default function BarChart({ data }) {
+export default function BarChart({ data, one, two }) {
   return (
     <div className="bar-chart">
       {data.map((value, index) => (
@@ -9,7 +9,7 @@ export default function BarChart({ data }) {
           className="bar"
           style={{
             height: `${value}px`, // Height is relative to the value
-            backgroundColor: "red",
+            backgroundColor: index === one || index === two ? 'white' : 'red',
           }}
         >
           {/* {value} */}

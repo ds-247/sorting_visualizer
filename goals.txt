@@ -5,3 +5,4 @@
 5. add button or dropdown for visualizing different sorting algos containing option of all sorting algos
 6. add option to include negative values or not in the array
 7. also add option to tell time required for different algo for sorting array of given size 
+8. can use context for state and using that can make algo in remote component
