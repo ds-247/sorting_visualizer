@@ -22,7 +22,33 @@ export default function FirstSection() {
     return new Promise((res) => setTimeout(res, ms));
   }
 
-  async function handleClick() {
+  function handleClick() {
+    // quickSort();
+    // mergeSort();
+    selectionSort(data);
+    // insertionSort(data);
+    // bubbleSort(data);
+  }
+
+ async   function insertionSort(data) {
+    for (let i = 0; i < data.length; i++) {
+      let j = i-1;
+      let value = data[i];
+      while (j >= 0 && data[j] >= value) {
+         let val = data[j];
+         data[j] = data[j+1];
+         data[j+1] = val;
+        j--;
+        setComp1(j);
+        await sleep(10);
+        setComp2(j+1);
+        await sleep(10)
+      }
+    }
+    setArr(data);
+  }
+
+  async function bubbleSort(data) {
     for (let i = 0; i < data.length; i++) {
       for (let j = 0; j < data.length - 1; j++) {
         setComp1(j);
@@ -31,12 +57,37 @@ export default function FirstSection() {
           let val = data[j];
           data[j] = data[j + 1];
           data[j + 1] = val;
-          await sleep(60);
+          await sleep(20);
         }
       }
       setArr(data);
+      await sleep(20);
     }
   }
+
+  async function selectionSort(data) {
+    for (let i = 0; i < data.length; i++) {
+      let minInd = i;
+      for (let j = minInd + 1; j < data.length; j++) {
+        if (data[j] < data[minInd]) {
+          minInd = j;
+          setComp1(minInd);
+        }
+        setComp2(j);
+        await sleep(10);
+      }
+      let val = data[minInd];
+      data[minInd] = data[i];
+      data[i] = val;
+      console.log("before");
+      setComp1(Math.min(data.length - 1, i + 1));
+      setArr(data);
+      await sleep(10);
+      console.log("after");
+    }
+  }
+
+  
 
   return (
     <div className="first">

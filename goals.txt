@@ -6,3 +6,5 @@
 6. add option to include negative values or not in the array
 7. also add option to tell time required for different algo for sorting array of given size 
 8. can use context for state and using that can make algo in remote component
+9. modify the layout of the viz according to the negative values
+10. viz color -> bg white bar -> black and iter -> white with border black
