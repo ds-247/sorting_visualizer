@@ -1,9 +1,9 @@
 import "./btn.scss";
 
-export default function Button({value, sort}) {
+export default function Button({value, onClick}) {
     function handleClick() {
         console.log("button is clicked");
-        sort();
+        onClick();
     }
     return (
         <div onClick={handleClick} className="btn">

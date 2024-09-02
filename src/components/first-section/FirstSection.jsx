@@ -23,7 +23,7 @@ export default function FirstSection() {
   const [comp2, setComp2] = useState(0);
   const [algo, setAlgo] = useState("Bubble");
   const [arr, setArr] = useState(data);
-  const ms = 5;
+  const [ms, setSpeed] = useState(5);
 
   function sleep() {
     return new Promise((res) => setTimeout(res, ms));
@@ -40,7 +40,7 @@ export default function FirstSection() {
   }
 
   function handleAlgoSelection(algo) {
-    setAlgo(algo)
+    setAlgo(algo);
   }
 
   function handleStart() {
@@ -205,14 +205,32 @@ export default function FirstSection() {
     }
   }
 
+  function SpeedDown() {
+    setSpeed((prev) => {
+      return prev + 10 >= 195 ? 195 : prev + 10;
+    });
+  }
+  
+  function SpeedUp() {
+    setSpeed((prev) => {
+      return prev - 10 <= 5 ? 5 : prev - 10;
+    });
+  }
+
   return (
     <div className="first">
       <Top>
-        <Dropdown options={algoList} selected={algo} handleAlgoSelection={handleAlgoSelection} />
+        <Dropdown
+          options={algoList}
+          selected={algo}
+          handleAlgoSelection={handleAlgoSelection}
+        />
         <Radio name="name" option="option" />
-        <Button value="Start" sort={handleStart} />
-        <Button value="Restart" sort={handleRestart} />
-        <Button value="Speed" />
+        <Button value="Start" onClick={handleStart} />
+        <Button value="Restart" onClick={handleRestart} />
+        <Button value="SpeedUp" onClick={SpeedUp} />
+        {ms}
+        <Button value="SpeedDown" onClick={SpeedDown} />
       </Top>
 
       <Viz data={arr} one={comp1} two={comp2} />

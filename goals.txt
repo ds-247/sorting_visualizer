@@ -9,3 +9,4 @@
 9. modify the layout of the viz according to the negative values
 10. viz color -> bg white bar -> black and iter -> white with border black
 11. option to set length of the array
+12. disable all buttons when the algo started and re enable when algo completed
