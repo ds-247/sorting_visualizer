@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Button from "../button/Button";
 import Top from "../top/Top";
-import "./first.scss";
 import Viz from "./visualize/Viz";
 import Dropdown from "./../dropdown/Dropdown";
 import Radio from "../radio/Radio";
+import "./first.scss";
 
-const algos = ["Option 1", "Option 2", "Option 3"];
+const algoList = ["Bubble", "Selection", "Insertion", "Merge", "Quick"];
 const data = [
   142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3, 142, 23, 22,
   23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3, 142, 23, 22, 23, 42, 43,
@@ -15,9 +15,13 @@ const data = [
   76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3,
 ];
 
+const MIN = 3;
+const MAX = 200;
+
 export default function FirstSection() {
   const [comp1, setComp1] = useState(0);
   const [comp2, setComp2] = useState(0);
+  const [algo, setAlgo] = useState("Bubble");
   const [arr, setArr] = useState(data);
   const ms = 5;
 
@@ -25,20 +29,34 @@ export default function FirstSection() {
     return new Promise((res) => setTimeout(res, ms));
   }
 
-  function handleClick() {
-    quick_sort(0, data.length-1, data);
-    // merge_sort(0, data.length-1, data);
-    // selectionSort(data);
-    // insertionSort(data);
-    // bubbleSort(data);
+  function handleRestart() {
+    let nums = [];
+    for (let i = 1; i <= 100; i++) {
+      let val = Math.random() * (MAX - MIN) + MIN;
+      nums.push(val);
+    }
+
+    setArr(nums);
+  }
+
+  function handleAlgoSelection(algo) {
+    setAlgo(algo)
+  }
+
+  function handleStart() {
+    if (algo === "Bubble") bubbleSort(arr);
+    else if (algo === "Quick") quick_sort(0, arr.length - 1, arr);
+    else if (algo === "Merge") merge_sort(0, data.length - 1, arr);
+    else if (algo === "Selection") selectionSort(arr);
+    else if (algo === "Insertion") insertionSort(arr);
   }
 
   async function quick_sort(lo, hi, data) {
-    if(lo<hi){
+    if (lo < hi) {
       let pivot_ind = await partition(lo, hi, data);
 
-      await quick_sort(lo, pivot_ind-1, data);
-      await quick_sort(pivot_ind+1, hi, data);
+      await quick_sort(lo, pivot_ind - 1, data);
+      await quick_sort(pivot_ind + 1, hi, data);
     }
   }
 
@@ -48,12 +66,12 @@ export default function FirstSection() {
     let right = hi;
 
     while (left <= right) {
-      while (left <=right && data[left] <= data[pivot]) {
+      while (left <= right && data[left] <= data[pivot]) {
         left++;
         setComp1(left);
-      await sleep();
+        await sleep();
       }
-      while (left<=right && data[right] > data[pivot]) {
+      while (left <= right && data[right] > data[pivot]) {
         right--;
 
         setComp2(right);
@@ -190,10 +208,10 @@ export default function FirstSection() {
   return (
     <div className="first">
       <Top>
-        <Dropdown options={algos} />
+        <Dropdown options={algoList} selected={algo} handleAlgoSelection={handleAlgoSelection} />
         <Radio name="name" option="option" />
-        <Button value="New Array" />
-        <Button value="Start" sort={handleClick} />
+        <Button value="Start" sort={handleStart} />
+        <Button value="Restart" sort={handleRestart} />
         <Button value="Speed" />
       </Top>
 

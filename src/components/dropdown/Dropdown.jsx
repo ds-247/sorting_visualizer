@@ -1,17 +1,17 @@
 import "./dropdown.scss";
 
-export default function Dropdown({ options }) {
+export default function Dropdown({ options , selected, handleAlgoSelection}) {
     let label = "Algos";
-    let selectedOption = "Doing";
 
     function handleSelectChange(params) {
-        // yet to implement
+      console.log(params.target.value)
+        handleAlgoSelection(params.target.value);
     }
 
   return (
     <div>
       <label>{label}</label>
-      <select value={selectedOption} onChange={handleSelectChange}>
+      <select value={selected} onChange={handleSelectChange}>
         <option value="" disabled>
           Select an option
         </option>
