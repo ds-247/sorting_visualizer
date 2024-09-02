@@ -46,7 +46,7 @@ export default function FirstSection() {
   function handleStart() {
     if (algo === "Bubble") bubbleSort(arr);
     else if (algo === "Quick") quick_sort(0, arr.length - 1, arr);
-    else if (algo === "Merge") merge_sort(0, data.length - 1, arr);
+    else if (algo === "Merge") merge_sort(0, arr.length - 1, arr);
     else if (algo === "Selection") selectionSort(arr);
     else if (algo === "Insertion") insertionSort(arr);
   }
@@ -225,11 +225,10 @@ export default function FirstSection() {
           selected={algo}
           handleAlgoSelection={handleAlgoSelection}
         />
-        <Radio name="name" option="option" />
+        <Radio name="name" option="Negatives" />
         <Button value="Start" onClick={handleStart} />
         <Button value="Restart" onClick={handleRestart} />
         <Button value="SpeedUp" onClick={SpeedUp} />
-        {ms}
         <Button value="SpeedDown" onClick={SpeedDown} />
       </Top>
 
