@@ -7,10 +7,11 @@
 }
 
 .bar {
-  width: 5px; /* Fixed width for each bar */
+  width: 10px; /* Fixed width for each bar */
   display: flex;
   align-items: flex-end;
   justify-content: center;
   color: white;
   font-weight: bold;
+  border-radius: 23px;
 }

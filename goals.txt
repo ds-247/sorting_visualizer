@@ -10,3 +10,5 @@
 10. viz color -> bg white bar -> black and iter -> white with border black
 11. option to set length of the array
 12. disable all buttons when the algo started and re enable when algo completed
+13. instead of speed values make speed level in a drop down with 5 levels of speed
+14. check if array is already sorted than prompt user sorted already

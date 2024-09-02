@@ -8,11 +8,10 @@ export default function BarChart({ data, one, two }) {
           key={index}
           className="bar"
           style={{
-            height: `${value}px`, // Height is relative to the value
-            backgroundColor: index === one || index === two ? 'white' : 'red',
+            height: `${value}px`, 
+            backgroundColor: index === one || index === two ? 'red' : 'black',
           }}
         >
-          {/* {value} */}
         </div>
       ))}
     </div>

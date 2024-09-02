@@ -8,11 +8,10 @@ import "./first.scss";
 
 const algoList = ["Bubble", "Selection", "Insertion", "Merge", "Quick"];
 const data = [
-  142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3, 142, 23, 22,
-  23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3, 142, 23, 22, 23, 42, 43,
-  200, 122, 13, 42, 56, 127, 76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13,
-  42, 56, 127, 76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127,
-  76, 54, 3, 142, 23, 22, 23, 42, 43, 200, 122, 13, 42, 56, 127, 76, 54, 3,
+  166, 132, 147, 20, 196, 174, 37, 94, 155, 200, 93, 41, 6, 181, 137, 146, 47,
+  96, 104, 198, 40, 147, 4, 29, 182, 155, 50, 125, 37, 71, 194, 7, 127, 27, 91,
+  144, 74, 61, 33, 172, 185, 178, 122, 51, 50, 161, 114, 144, 123, 176, 140, 63,
+  166, 51, 30, 165, 19, 177, 193, 133, 13, 5, 31, 136, 27, 68, 20, 27, 186, 115,
 ];
 
 const MIN = 3;
@@ -21,9 +20,9 @@ const MAX = 200;
 export default function FirstSection() {
   const [comp1, setComp1] = useState(0);
   const [comp2, setComp2] = useState(0);
-  const [algo, setAlgo] = useState("Bubble");
+  const [algo, setAlgo] = useState("Quick");
   const [arr, setArr] = useState(data);
-  const [ms, setSpeed] = useState(5);
+  const [ms, setSpeed] = useState(65);
 
   function sleep() {
     return new Promise((res) => setTimeout(res, ms));
@@ -31,7 +30,7 @@ export default function FirstSection() {
 
   function handleRestart() {
     let nums = [];
-    for (let i = 1; i <= 100; i++) {
+    for (let i = 1; i <= 70; i++) {
       let val = Math.random() * (MAX - MIN) + MIN;
       nums.push(val);
     }
