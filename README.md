@@ -7,3 +7,4 @@ Welcome to the Sorting Visualizer! This project is built with React and Vite and
 - Interactive visualization of popular sorting algorithms
 - Fast build and development experience with Vite
 - Dynamic and responsive UI using React
+- Implemented 5 sorting algos
