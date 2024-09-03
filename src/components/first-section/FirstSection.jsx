@@ -7,11 +7,12 @@ import Radio from "../radio/Radio";
 import "./first.scss";
 
 const algoList = ["Bubble", "Selection", "Insertion", "Merge", "Quick"];
+const speedList = [{ 1: 50 }, { 2: 40 }, { 3: 30 }, { 4: 20 }, { 5: 10 }];
 const data = [
-  32,92, 147, 20, 196, 174, 37, 94, 155, 200, 93, 41, 6, 181, 137, 146, 47,
-  96, 104, 198, 40, 147, 4, 29, 182, 155, 50, 125, 37, 71, 194, 7, 127, 27, 91,
-  144, 74, 61, 33, 172, 185, 178, 122, 51, 50, 161, 114, 144, 123, 176, 140, 63,
-  166, 51, 30, 165, 19, 177, 193, 133, 13, 5, 31, 136, 27, 68, 20, 27, 186, 115,
+  32, 92, 147, 20, 196, 174, 37, 94, 155, 200, 93, 41, 6, 181, 137, 146, 47, 96,
+  104, 198, 40, 147, 4, 29, 182, 155, 50, 125, 37, 71, 194, 7, 127, 27, 91, 144,
+  74, 61, 33, 172, 185, 178, 122, 51, 50, 161, 114, 144, 123, 176, 140, 63, 166,
+  51, 30, 165, 19, 177, 193, 133, 13, 5, 31, 136, 27, 68, 20, 27, 186, 115,
 ];
 
 const MIN = 3;
@@ -22,7 +23,7 @@ export default function FirstSection() {
   const [comp2, setComp2] = useState(0);
   const [algo, setAlgo] = useState("Quick");
   const [arr, setArr] = useState(data);
-  const [ms, setSpeed] = useState(65);
+  const [ms, setSpeed] = useState(30);
 
   function sleep() {
     return new Promise((res) => setTimeout(res, ms));
@@ -51,7 +52,7 @@ export default function FirstSection() {
   }
 
   async function quick_sort(lo, hi, data) {
-    if (lo < hi) {
+    if (lo <= hi) {
       let pivot_ind = await partition(lo, hi, data);
 
       await quick_sort(lo, pivot_ind - 1, data);
@@ -70,7 +71,7 @@ export default function FirstSection() {
         setComp1(left);
         await sleep();
       }
-      while (left <= right && data[right] > data[pivot]) {
+      while (left <= right && data[right] >= data[pivot]) {
         right--;
 
         setComp2(right);
@@ -81,9 +82,6 @@ export default function FirstSection() {
         let temp = data[left];
         data[left] = data[right];
         data[right] = temp;
-
-        setArr(data);
-        await sleep();
       }
     }
 
@@ -91,6 +89,7 @@ export default function FirstSection() {
     data[right] = data[pivot];
     data[pivot] = temp;
 
+    setArr([...data]);
     await sleep();
 
     return right;
@@ -204,12 +203,10 @@ export default function FirstSection() {
     }
   }
 
-  function SpeedDown() {
-    setSpeed((prev) => {
-      return prev + 10 >= 195 ? 195 : prev + 10;
-    });
+  function handleSpeedChange(speed) {
+    setSpeed(speed);
   }
-  
+
   function SpeedUp() {
     setSpeed((prev) => {
       return prev - 10 <= 5 ? 5 : prev - 10;
@@ -220,6 +217,7 @@ export default function FirstSection() {
     <div className="first">
       <Top>
         <Dropdown
+          label="Algos"
           options={algoList}
           selected={algo}
           handleAlgoSelection={handleAlgoSelection}
@@ -227,8 +225,12 @@ export default function FirstSection() {
         <Radio name="name" option="Negatives" />
         <Button value="Start" onClick={handleStart} />
         <Button value="Restart" onClick={handleRestart} />
-        <Button value="SpeedUp" onClick={SpeedUp} />
-        <Button value="SpeedDown" onClick={SpeedDown} />
+        <Dropdown
+          label="Speed"
+          options={speedList}
+          selected={ms}
+          handleAlgoSelection={handleSpeedChange}
+        />
       </Top>
 
       <Viz data={arr} one={comp1} two={comp2} />

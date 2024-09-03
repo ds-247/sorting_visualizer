@@ -1,10 +1,8 @@
 import "./dropdown.scss";
 
-export default function Dropdown({ options , selected, handleAlgoSelection}) {
-    let label = "Algos";
+export default function Dropdown({ label, options , selected, handleAlgoSelection}) {
 
     function handleSelectChange(params) {
-      console.log(params.target.value)
         handleAlgoSelection(params.target.value);
     }
 
@@ -16,8 +14,13 @@ export default function Dropdown({ options , selected, handleAlgoSelection}) {
           Select an option
         </option>
         {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
+          <option
+            key={index}
+            value={
+              typeof option === "string" ? option : Object.values(option)[0]
+            }
+          >
+            {typeof option === "string" ? option : Object.keys(option)[0]}
           </option>
         ))}
       </select>
