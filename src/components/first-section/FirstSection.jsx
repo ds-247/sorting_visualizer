@@ -7,23 +7,29 @@ import Radio from "../radio/Radio";
 import "./first.scss";
 
 const algoList = ["Bubble", "Selection", "Insertion", "Merge", "Quick"];
-const speedList = [{ "Speed 1 x ": 50 }, { "Speed 2 x": 40 }, { "Speed 3 x": 30 }, { "Speed 4 x": 20 }, { "Speed 5 x": 10 }];
+const speedList = [
+  { Visualize: 350 },
+  { "Speed 2 x": 250 },
+  { "Speed 3 x": 150 },
+  { "Speed 4 x": 100 },
+  { "Speed 5 x": 50 },
+];
 const data = [
   32, 92, 147, 20, 196, 174, 37, 94, 155, 200, 93, 41, 6, 181, 137, 146, 47, 96,
-  104, 198, 40, 147, 4, 29, 182, 155, 50, 125, 37, 71, 194, 7, 127, 27, 91, 144,
-  74, 61, 33, 172, 185, 178, 122, 51, 50, 161, 114, 144, 123, 176, 140, 63, 166,
-  51, 30, 165, 19, 177, 193, 133, 13, 5, 31, 136, 27, 68, 20, 27, 186, 115,
+  104, 198, 40, 147, 4, 29, 182, 155, 50, 125, 37, 71,
 ];
 
-const MIN = 3;
+const MIN = 30;
 const MAX = 200;
 
 export default function FirstSection() {
-  const [comp1, setComp1] = useState(0);
-  const [comp2, setComp2] = useState(0);
-  const [algo, setAlgo] = useState("Quick");
+  const [swapArr, setSwapArr] = useState([]);
+  const [iter, setIter] = useState(0);
+  const [activated, setActivated] = useState();
+  const [spectator, setSpectator] = useState();
+  const [algo, setAlgo] = useState("Insertion");
   const [arr, setArr] = useState(data);
-  const [ms, setSpeed] = useState(30);
+  const [ms, setSpeed] = useState(350);
 
   function sleep() {
     return new Promise((res) => setTimeout(res, ms));
@@ -31,12 +37,20 @@ export default function FirstSection() {
 
   function handleRestart() {
     let nums = [];
-    for (let i = 1; i <= 70; i++) {
+    for (let i = 1; i <= 30; i++) {
       let val = Math.random() * (MAX - MIN) + MIN;
       nums.push(val);
     }
 
     setArr([...nums]);
+  }
+
+  async function swap(nums, i, j) {
+    [nums[j], nums[i]] = [nums[i], nums[j]];
+    setSwapArr([i, j]);
+    await sleep();
+    setSwapArr((prev) => []);
+    await sleep();
   }
 
   function handleAlgoSelection(algo) {
@@ -45,159 +59,153 @@ export default function FirstSection() {
 
   function handleStart() {
     if (algo === "Bubble") bubbleSort(arr);
-    else if (algo === "Quick") quick_sort(0, arr.length - 1, arr);
-    else if (algo === "Merge") merge_sort(0, arr.length - 1, arr);
     else if (algo === "Selection") selectionSort(arr);
     else if (algo === "Insertion") insertionSort(arr);
+    // else if (algo === "Quick") quick_sort(0, arr.length - 1, arr);
+    // else if (algo === "Merge") merge_sort(0, arr.length - 1, arr);
   }
 
-  async function quick_sort(lo, hi, data) {
-    if (lo <= hi) {
-      let pivot_ind = await partition(lo, hi, data);
+  // async function quick_sort(lo, hi, data) {
+  //   if (lo <= hi) {
+  //     let pivot_ind = await partition(lo, hi, data);
 
-      await quick_sort(lo, pivot_ind - 1, data);
-      await quick_sort(pivot_ind + 1, hi, data);
-    }
-  }
+  //     Promise.all([
+  //       await quick_sort(lo, pivot_ind - 1, data),
+  //       await quick_sort(pivot_ind + 1, hi, data),
+  //     ]);
+  //   }
+  // }
 
-  async function partition(lo, hi, data) {
-    let pivot = lo;
-    let left = lo + 1;
-    let right = hi;
+  // async function partition(lo, hi, data) {
+  //   let pivot = lo;
+  //   let left = lo + 1;
+  //   let right = hi;
 
-    while (left <= right) {
-      while (left <= right && data[left] <= data[pivot]) {
-        left++;
-        setComp1(left);
-        await sleep();
-      }
-      while (left <= right && data[right] >= data[pivot]) {
-        right--;
+  //   while (left <= right) {
+  //     while (left <= right && data[left] <= data[pivot]) {
+  //       left++;
+  //       setComp1(left);
+  //     }
+  //     while (left <= right && data[right] >= data[pivot]) {
+  //       right--;
 
-        setComp2(right);
-        await sleep();
-      }
+  //       setComp2(right);
+  //     }
 
-      if (left < right) {
-        let temp = data[left];
-        data[left] = data[right];
-        data[right] = temp;
-      }
-    }
+  //     if (left < right) {
+  //       await swap(data, left, right);
+  //     }
+  //   }
 
-    let temp = data[right];
-    data[right] = data[pivot];
-    data[pivot] = temp;
+  //   await swap(data, pivot, right);
 
-    setArr([...data]);
-    await sleep();
+  //   setArr([...data]);
 
-    return right;
-  }
+  //   return right;
+  // }
 
-  async function merge_sort(lo, hi, data) {
-    if (lo < hi) {
-      let mid = Math.floor(lo + (hi - lo) / 2);
+  // async function merge_sort(lo, hi, data) {
+  //   if (lo < hi) {
+  //     let mid = Math.floor(lo + (hi - lo) / 2);
 
-      // Visualize current boundaries
-      setComp1(lo); // Highlight left boundary
-      await sleep();
-      setComp2(hi); // Highlight right boundary
-      await sleep();
+  //     // Visualize current boundaries
+  //     setComp1(lo); // Highlight left boundary
+  //     await sleep();
+  //     setComp2(hi); // Highlight right boundary
+  //     await sleep();
 
-      // Sort first and second halves
-      await merge_sort(lo, mid, data);
-      await sleep();
-      await merge_sort(mid + 1, hi, data);
-      await sleep();
+  //     // Sort first and second halves
+  //     await merge_sort(lo, mid, data);
+  //     await sleep();
+  //     await merge_sort(mid + 1, hi, data);
+  //     await sleep();
 
-      // Merge the two halves
-      await merge(lo, mid, hi, data);
-      await sleep();
-    }
-  }
+  //     // Merge the two halves
+  //     await merge(lo, mid, hi, data);
+  //     await sleep();
+  //   }
+  // }
 
-  async function merge(left, mid, right, data) {
-    let temp_arr = [];
+  // async function merge(left, mid, right, data) {
+  //   let temp_arr = [];
 
-    let left_ind = left;
-    let right_ind = mid + 1;
+  //   let left_ind = left;
+  //   let right_ind = mid + 1;
 
-    // Merge the two subarrays
-    while (left_ind <= mid && right_ind <= right) {
-      if (data[left_ind] <= data[right_ind]) {
-        temp_arr.push(data[left_ind++]);
-      } else {
-        temp_arr.push(data[right_ind++]);
-      }
-    }
+  //   // Merge the two subarrays
+  //   while (left_ind <= mid && right_ind <= right) {
+  //     if (data[left_ind] <= data[right_ind]) {
+  //       temp_arr.push(data[left_ind++]);
+  //     } else {
+  //       temp_arr.push(data[right_ind++]);
+  //     }
+  //   }
 
-    // Copy any remaining elements of the left subarray
-    while (left_ind <= mid) temp_arr.push(data[left_ind++]);
+  //   // Copy any remaining elements of the left subarray
+  //   while (left_ind <= mid) temp_arr.push(data[left_ind++]);
 
-    // Copy any remaining elements of the right subarray
-    while (right_ind <= right) temp_arr.push(data[right_ind++]);
+  //   // Copy any remaining elements of the right subarray
+  //   while (right_ind <= right) temp_arr.push(data[right_ind++]);
 
-    // Copy the merged elements back into the original array
-    for (let i = 0; i < temp_arr.length; i++) {
-      data[left + i] = temp_arr[i];
-    }
+  //   // Copy the merged elements back into the original array
+  //   for (let i = 0; i < temp_arr.length; i++) {
+  //     data[left + i] = temp_arr[i];
+  //   }
 
-    // Visualize the updated array
-    setArr([...data]); // Use spread operator to ensure state updates correctly
-    await sleep();
-  }
+  //   // Visualize the updated array
+  //   setArr([...data]); // Use spread operator to ensure state updates correctly
+  //   await sleep();
+  // }
 
   async function insertionSort(data) {
     for (let i = 0; i < data.length; i++) {
       let j = i - 1;
+
+      setIter(i);
+      setActivated(j);
+      await sleep();
+
       let value = data[i];
       while (j >= 0 && data[j] >= value) {
-        let val = data[j];
-        data[j] = data[j + 1];
-        data[j + 1] = val;
+        await swap(data, j, j + 1);
         j--;
-        setComp1(j);
-        await sleep();
-        setComp2(j + 1);
+
+        setActivated(j);
         await sleep();
       }
     }
     setArr([...data]);
-  }
-
-  async function bubbleSort(data) {
-    for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < data.length - 1; j++) {
-        setComp1(j);
-        setComp2(j + 1);
-        if (data[j] > data[j + 1]) {
-          let val = data[j];
-          data[j] = data[j + 1];
-          data[j + 1] = val;
-          await sleep();
-        }
-      }
-      setArr([...data]);
-      await sleep();
-    }
   }
 
   async function selectionSort(data) {
     for (let i = 0; i < data.length; i++) {
       let minInd = i;
+      setSpectator(i);
+      await sleep();
+
       for (let j = minInd + 1; j < data.length; j++) {
+        setIter(j);
+        await sleep();
+
         if (data[j] < data[minInd]) {
           minInd = j;
-          setComp1(minInd);
+          setActivated(minInd);
+          await sleep();
         }
-        setComp2(j);
-        await sleep();
       }
-      let val = data[minInd];
-      data[minInd] = data[i];
-      data[i] = val;
-      setComp1(Math.min(data.length - 1, i + 1));
+      await swap(data, minInd, i);
+      setArr([...data]);
+      await sleep();
+    }
+  }
+
+  async function bubbleSort(data) {
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data.length - i - 1; j++) {
+        if (data[j] > data[j + 1]) {
+          await swap(data, j, j + 1);
+        }
+      }
       setArr([...data]);
       await sleep();
     }
@@ -206,7 +214,6 @@ export default function FirstSection() {
   function handleSpeedChange(speed) {
     setSpeed(speed);
   }
-
 
   return (
     <div className="first">
@@ -226,7 +233,13 @@ export default function FirstSection() {
         />
       </Top>
 
-      <Viz data={arr} one={comp1} two={comp2} />
+      <Viz
+        data={arr}
+        iter={iter}
+        spectator={spectator}
+        activated={activated}
+        swapArr={swapArr}
+      />
     </div>
   );
 }
