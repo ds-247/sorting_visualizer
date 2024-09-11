@@ -1,14 +1,13 @@
 import "./dropdown.scss";
 
-export default function Dropdown({ label, options , selected, handleAlgoSelection}) {
+export default function Dropdown({ options , selected, handleAlgoSelection}) {
 
     function handleSelectChange(params) {
         handleAlgoSelection(params.target.value);
     }
 
   return (
-    <div>
-      <label>{label}</label>
+    <div className="dropDown">
       <select value={selected} onChange={handleSelectChange}>
         <option value="" disabled>
           Select an option

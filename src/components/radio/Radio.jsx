@@ -9,7 +9,7 @@ export default function Radio({name, option}) {
     }
 
     return (
-      <div>
+      <div className="radio-cont">
         <input
           type="radio"
           name={name}

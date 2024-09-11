@@ -1,7 +1,16 @@
-.btn{
-    background-color: #15fa05;
-    padding: 3px 25px;
+.btn {
+  background-color: #5eb9f5;
+    padding: 6px 20px;
     border-radius: 5px;
-    box-shadow: 0 3px black;
+    box-shadow: 0 4px black;
+    color: white;
+    font-size: 12px;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn:active {
+    box-shadow: 0 1px black;
+    transform: translateY(3px);
+    background-color: #fe0069;
 }

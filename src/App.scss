@@ -1,3 +1,4 @@
+
 .container {
   height: 100vh;
   scroll-snap-type: y mandatory;
@@ -7,7 +8,7 @@
 section {
   height: 100vh;
   scroll-snap-align: start;
-   background-color: red;
+   background-color: #fe0069;
    display: flex;
    justify-content: center;
    align-items: center;

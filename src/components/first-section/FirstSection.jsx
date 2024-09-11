@@ -7,7 +7,7 @@ import Radio from "../radio/Radio";
 import "./first.scss";
 
 const algoList = ["Bubble", "Selection", "Insertion", "Merge", "Quick"];
-const speedList = [{ 1: 50 }, { 2: 40 }, { 3: 30 }, { 4: 20 }, { 5: 10 }];
+const speedList = [{ "Speed 1 x ": 50 }, { "Speed 2 x": 40 }, { "Speed 3 x": 30 }, { "Speed 4 x": 20 }, { "Speed 5 x": 10 }];
 const data = [
   32, 92, 147, 20, 196, 174, 37, 94, 155, 200, 93, 41, 6, 181, 137, 146, 47, 96,
   104, 198, 40, 147, 4, 29, 182, 155, 50, 125, 37, 71, 194, 7, 127, 27, 91, 144,
@@ -36,7 +36,7 @@ export default function FirstSection() {
       nums.push(val);
     }
 
-    setArr(nums);
+    setArr([...nums]);
   }
 
   function handleAlgoSelection(algo) {
@@ -163,7 +163,7 @@ export default function FirstSection() {
         await sleep();
       }
     }
-    setArr(data);
+    setArr([...data]);
   }
 
   async function bubbleSort(data) {
@@ -178,7 +178,7 @@ export default function FirstSection() {
           await sleep();
         }
       }
-      setArr(data);
+      setArr([...data]);
       await sleep();
     }
   }
@@ -198,7 +198,7 @@ export default function FirstSection() {
       data[minInd] = data[i];
       data[i] = val;
       setComp1(Math.min(data.length - 1, i + 1));
-      setArr(data);
+      setArr([...data]);
       await sleep();
     }
   }
@@ -207,17 +207,11 @@ export default function FirstSection() {
     setSpeed(speed);
   }
 
-  function SpeedUp() {
-    setSpeed((prev) => {
-      return prev - 10 <= 5 ? 5 : prev - 10;
-    });
-  }
 
   return (
     <div className="first">
       <Top>
         <Dropdown
-          label="Algos"
           options={algoList}
           selected={algo}
           handleAlgoSelection={handleAlgoSelection}
@@ -226,7 +220,6 @@ export default function FirstSection() {
         <Button value="Start" onClick={handleStart} />
         <Button value="Restart" onClick={handleRestart} />
         <Dropdown
-          label="Speed"
           options={speedList}
           selected={ms}
           handleAlgoSelection={handleSpeedChange}
