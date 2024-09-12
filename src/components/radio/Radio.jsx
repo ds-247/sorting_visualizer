@@ -1,6 +1,6 @@
 import "./radio.scss";
 
-export default function Radio({name, option}) {
+export default function Radio({name, option, disable}) {
 
     const selectedOption = ''
 
@@ -16,6 +16,7 @@ export default function Radio({name, option}) {
           value={option}
           checked={selectedOption === option}
           onChange={handleOptionChange}
+          disabled={disable}
         />
         <label>{option}</label>
       </div>

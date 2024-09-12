@@ -1,6 +1,6 @@
 import "./dropdown.scss";
 
-export default function Dropdown({ options , selected, handleAlgoSelection}) {
+export default function Dropdown({ options , selected, handleAlgoSelection, disable}) {
 
     function handleSelectChange(params) {
         handleAlgoSelection(params.target.value);
@@ -8,7 +8,7 @@ export default function Dropdown({ options , selected, handleAlgoSelection}) {
 
   return (
     <div className="dropDown">
-      <select value={selected} onChange={handleSelectChange}>
+      <select value={selected} onChange={handleSelectChange} disabled={disable}>
         <option value="" disabled>
           Select an option
         </option>

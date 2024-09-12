@@ -29,7 +29,7 @@ export default function BarChart({
             key={index}
             className="bar"
             style={{
-              height: `${value}px`,
+              height: `${value * 3}px`,
               backgroundColor: color,
             }}
           ></div>

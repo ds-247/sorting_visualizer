@@ -1,16 +1,15 @@
-.top{
-    width: 92%;
-    height: 39px;
-    background-color: #171717;
-    border-radius: 20px;
-    margin: 16px auto;
+.top {
+  width: 66%;
+  height: 50px;
+  background-color: #171717;
+  border-radius: 35px;
+  margin: 16px auto;
 }
 
-.top > :first-child{
-    margin-left: 10%;
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 50px;
+.top > :first-child {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
 }

@@ -15,14 +15,15 @@ const speedList = [
   { "Speed 5 x": 50 },
 ];
 const data = [
-  32, 92, 147, 20, 196, 174, 37, 94, 155, 200, 93, 41, 6, 181, 137, 146, 47, 96,
-  104, 198, 40, 147, 4, 29, 182, 155, 50, 125, 37, 71,
+  87, 25, 33, 95, 58, 41, 69, 90, 73, 66, 53, 17, 62, 81, 99, 76, 45, 20, 35,
+  28, 31, 47, 13, 54, 24, 88, 38, 96, 77, 71, 92, 14, 79, 60, 48,
 ];
 
-const MIN = 30;
-const MAX = 200;
+const MIN = 10;
+const MAX = 100;
 
 export default function FirstSection() {
+  const [disable, setDisable] = useState(false);
   const [purple, setPurple] = useState();
   const [green, setGreen] = useState(); // green -- single value
   const [orange, setOrange] = useState(); // orange
@@ -41,7 +42,7 @@ export default function FirstSection() {
 
   function handleRestart() {
     let nums = [];
-    for (let i = 1; i <= 30; i++) {
+    for (let i = 1; i <= 35; i++) {
       let val = Math.random() * (MAX - MIN) + MIN;
       nums.push(val);
     }
@@ -60,20 +61,32 @@ export default function FirstSection() {
   async function swap(nums, i, j) {
     [nums[j], nums[i]] = [nums[i], nums[j]];
     setRed([i, j]);
-    setRed((prev) => []);
     await sleep();
+    setRed((prev) => []);
   }
 
   function handleAlgoSelection(algo) {
     setAlgo(algo);
   }
 
-  function handleStart() {
-    if (algo === "Bubble") bubbleSort(arr);
-    else if (algo === "Selection") selectionSort(arr);
-    else if (algo === "Insertion") insertionSort(arr);
-    else if (algo === "Quick") quick_sort(0, arr.length - 1, arr);
-    else if (algo === "Merge") merge_sort(0, arr.length - 1, arr);
+  async function handleStart() {
+    setDisable((prev) => true);
+    if (algo === "Bubble") {
+      await bubbleSort(arr);
+      setDisable((prev) => false);
+    } else if (algo === "Selection") {
+      await selectionSort(arr);
+      setDisable((prev) => false);
+    } else if (algo === "Insertion") {
+      await insertionSort(arr);
+      setDisable((prev) => false);
+    } else if (algo === "Quick") {
+      await quick_sort(0, arr.length - 1, arr);
+      setDisable((prev) => false);
+    } else if (algo === "Merge") {
+      await merge_sort(0, arr.length - 1, arr);
+      setDisable((prev) => false);
+    }
 
     complete();
   }
@@ -144,10 +157,10 @@ export default function FirstSection() {
   async function merge(left, mid, right, data) {
     let left_ind = left;
     let right_ind = mid + 1;
-    let temp = fill(left,right)
+    let temp = fill(left, right);
 
     setRed([left, right]);
-    setCompletion(prev => [...prev,...temp])
+    setCompletion((prev) => [...prev, ...temp]);
     await sleep();
 
     while (left_ind <= mid && right_ind <= right) {
@@ -226,7 +239,12 @@ export default function FirstSection() {
       for (let j = 0; j < data.length - i - 1; j++) {
         if (data[j] > data[j + 1]) {
           await swap(data, j, j + 1);
+        } else {
+          setBlue(j);
+          await sleep();
         }
+        setBlue();
+        await sleep();
       }
       setArr([...data]);
       setCompletion((prev) => [...prev, data.length - 1 - i]);
@@ -245,14 +263,16 @@ export default function FirstSection() {
           options={algoList}
           selected={algo}
           handleAlgoSelection={handleAlgoSelection}
+          disable={disable}
         />
-        <Radio name="name" option="Negatives" />
-        <Button value="Start" onClick={handleStart} />
-        <Button value="Restart" onClick={handleRestart} />
+        <Radio name="name" option="Negatives" disable={disable} />
+        <Button value="Start" onClick={handleStart} disable={disable} />
+        <Button value="Restart" onClick={handleRestart} disable={disable} />
         <Dropdown
           options={speedList}
           selected={ms}
           handleAlgoSelection={handleSpeedChange}
+          disable={disable}
         />
       </Top>
 
