@@ -2,19 +2,23 @@ import "./bar.scss";
 
 export default function BarChart({
   data,
-  iter,
-  activated,
-  spectator,
-  swapArr,
+  green,
+  orange,
+  skyBlue,
+  pink,
+  blue,
+  red,
 }) {
   return (
     <div className="bar-chart">
       {data.map((value, index) => {
         let color = "black";
-        if (swapArr.includes(index)) color = "red";
-        else if (index == iter) color = "#00f700";
-        else if (index == activated) color = "orange";
-        else if (index == spectator) color = "blue";
+        if (red.includes(index)) color = "red";
+        else if (index == green) color = "#00f700";
+        else if (index == orange) color = "orange";
+        else if (index == blue) color = "blue";
+        else if (pink.includes(index)) color = "pink";
+        else if (skyBlue.includes(index)) color = "blue";
 
         return (
           <div

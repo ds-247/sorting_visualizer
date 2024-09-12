@@ -1,15 +1,17 @@
 import BarChart from "../../bar-chart/BarChart";
 import "./viz.scss";
 
-export default function Viz({ data, iter, activated, spectator, swapArr }) {
+export default function Viz({ data, green, orange, pink, skyBlue, blue, red }) {
   return (
     <div className="viz">
       <BarChart
-        swapArr={swapArr}
-        iter={iter}
-        activated={activated}
+        red={red}
+        green={green}
+        orange={orange}
         data={data}
-        spectator={spectator}
+        blue={blue}
+        skyBlue={skyBlue}
+        pink={pink}
       />
     </div>
   );

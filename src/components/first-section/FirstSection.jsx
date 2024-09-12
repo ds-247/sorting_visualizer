@@ -23,11 +23,13 @@ const MIN = 30;
 const MAX = 200;
 
 export default function FirstSection() {
-  const [swapArr, setSwapArr] = useState([]);
-  const [iter, setIter] = useState(0);
-  const [activated, setActivated] = useState();
-  const [spectator, setSpectator] = useState();
-  const [algo, setAlgo] = useState("Insertion");
+  const [red, setRed] = useState([]); // red -- array
+  const [green, setGreen] = useState(); // green -- single value
+  const [orange, setOrange] = useState(); // orange
+  const [blue, setBlue] = useState(); // blue
+  const [pink, setPink] = useState([]); // pink -- array
+  const [skyBlue, setSkyBlue] = useState([]); // pink -- array
+  const [algo, setAlgo] = useState("Merge");
   const [arr, setArr] = useState(data);
   const [ms, setSpeed] = useState(350);
 
@@ -43,13 +45,19 @@ export default function FirstSection() {
     }
 
     setArr([...nums]);
+    setRed([]);
+    setGreen();
+    setOrange();
+    setBlue();
+    setPink([]);
+    setSkyBlue([]);
   }
 
   async function swap(nums, i, j) {
     [nums[j], nums[i]] = [nums[i], nums[j]];
-    setSwapArr([i, j]);
+    setRed([i, j]);
     await sleep();
-    setSwapArr((prev) => []);
+    setRed((prev) => []);
     await sleep();
   }
 
@@ -62,7 +70,13 @@ export default function FirstSection() {
     else if (algo === "Selection") selectionSort(arr);
     else if (algo === "Insertion") insertionSort(arr);
     // else if (algo === "Quick") quick_sort(0, arr.length - 1, arr);
-    // else if (algo === "Merge") merge_sort(0, arr.length - 1, arr);
+    else if (algo === "Merge") merge_sort(0, arr.length - 1, arr);
+
+    complete();
+  }
+
+  function complete() {
+    // set all states to initial and set every index to green
   }
 
   // async function quick_sort(lo, hi, data) {
@@ -104,65 +118,65 @@ export default function FirstSection() {
   //   return right;
   // }
 
-  // async function merge_sort(lo, hi, data) {
-  //   if (lo < hi) {
-  //     let mid = Math.floor(lo + (hi - lo) / 2);
+  async function merge_sort(lo, hi, data) {
+    if (lo < hi) {
+      let mid = Math.floor(lo + (hi - lo) / 2);
 
-  //     // Visualize current boundaries
-  //     setComp1(lo); // Highlight left boundary
-  //     await sleep();
-  //     setComp2(hi); // Highlight right boundary
-  //     await sleep();
+      await merge_sort(lo, mid, data),
+      await merge_sort(mid + 1, hi, data),
+      await merge(lo, mid, hi, data);
+    }
+  }
 
-  //     // Sort first and second halves
-  //     await merge_sort(lo, mid, data);
-  //     await sleep();
-  //     await merge_sort(mid + 1, hi, data);
-  //     await sleep();
+  function fill(i, j) {
+    let arr = [];
+    for (let u = i; u <= j; u++) {
+      arr.push(u);
+    }
 
-  //     // Merge the two halves
-  //     await merge(lo, mid, hi, data);
-  //     await sleep();
-  //   }
-  // }
+    return arr;
+  }
 
-  // async function merge(left, mid, right, data) {
-  //   let temp_arr = [];
+  async function merge(left, mid, right, data) {
+    let left_ind = left;
+    let right_ind = mid + 1;
 
-  //   let left_ind = left;
-  //   let right_ind = mid + 1;
+    setRed([left, right]);
+    setPink(fill(left, right));
+    await sleep();
 
-  //   // Merge the two subarrays
-  //   while (left_ind <= mid && right_ind <= right) {
-  //     if (data[left_ind] <= data[right_ind]) {
-  //       temp_arr.push(data[left_ind++]);
-  //     } else {
-  //       temp_arr.push(data[right_ind++]);
-  //     }
-  //   }
+    while (left_ind <= mid && right_ind <= right) {
+      if (data[left_ind] <= data[right_ind]) {
+        left_ind++;
+        setGreen(left_ind);
+        await sleep();
+      } else {
+        let value = data[right_ind];
+        let index = right_ind;
 
-  //   // Copy any remaining elements of the left subarray
-  //   while (left_ind <= mid) temp_arr.push(data[left_ind++]);
+        while (index > left_ind) {
+          data[index] = data[index - 1];
+          index--;
+        }
 
-  //   // Copy any remaining elements of the right subarray
-  //   while (right_ind <= right) temp_arr.push(data[right_ind++]);
+        data[left_ind] = value;
 
-  //   // Copy the merged elements back into the original array
-  //   for (let i = 0; i < temp_arr.length; i++) {
-  //     data[left + i] = temp_arr[i];
-  //   }
+        left_ind++;
+        mid++;
+        right_ind++;
+      }
 
-  //   // Visualize the updated array
-  //   setArr([...data]); // Use spread operator to ensure state updates correctly
-  //   await sleep();
-  // }
+      setArr([...data]);
+      await sleep();
+    }
+  }
 
   async function insertionSort(data) {
     for (let i = 0; i < data.length; i++) {
       let j = i - 1;
 
-      setIter(i);
-      setActivated(j);
+      setGreen(i);
+      setOrange(j);
       await sleep();
 
       let value = data[i];
@@ -170,7 +184,7 @@ export default function FirstSection() {
         await swap(data, j, j + 1);
         j--;
 
-        setActivated(j);
+        setOrange(j);
         await sleep();
       }
     }
@@ -180,16 +194,16 @@ export default function FirstSection() {
   async function selectionSort(data) {
     for (let i = 0; i < data.length; i++) {
       let minInd = i;
-      setSpectator(i);
+      setBlue(i);
       await sleep();
 
       for (let j = minInd + 1; j < data.length; j++) {
-        setIter(j);
+        setGreen(j);
         await sleep();
 
         if (data[j] < data[minInd]) {
           minInd = j;
-          setActivated(minInd);
+          -setOrange(minInd);
           await sleep();
         }
       }
@@ -235,10 +249,12 @@ export default function FirstSection() {
 
       <Viz
         data={arr}
-        iter={iter}
-        spectator={spectator}
-        activated={activated}
-        swapArr={swapArr}
+        green={green}
+        blue={blue}
+        orange={orange}
+        skyBlue={skyBlue}
+        red={red}
+        pink={pink}
       />
     </div>
   );
