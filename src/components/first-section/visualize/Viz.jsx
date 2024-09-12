@@ -7,6 +7,7 @@ export default function Viz({
   orange,
   completion,
   pink,
+  purple,
   skyBlue,
   blue,
   red,
@@ -20,6 +21,7 @@ export default function Viz({
         data={data}
         blue={blue}
         skyBlue={skyBlue}
+        purple={purple}
         pink={pink}
         completion={completion}
       />

@@ -23,14 +23,15 @@ const MIN = 30;
 const MAX = 200;
 
 export default function FirstSection() {
-  const [red, setRed] = useState([]); // red -- array
+  const [purple, setPurple] = useState();
   const [green, setGreen] = useState(); // green -- single value
   const [orange, setOrange] = useState(); // orange
   const [blue, setBlue] = useState(); // blue
+  const [red, setRed] = useState([]); // red -- array
   const [pink, setPink] = useState([]); // pink -- array
   const [skyBlue, setSkyBlue] = useState([]); // blue -- array
   const [completion, setCompletion] = useState([]); // blue -- array
-  const [algo, setAlgo] = useState("Quick");
+  const [algo, setAlgo] = useState("Bubble");
   const [arr, setArr] = useState(data);
   const [ms, setSpeed] = useState(350);
 
@@ -52,13 +53,13 @@ export default function FirstSection() {
     setBlue();
     setPink([]);
     setSkyBlue([]);
+    setPurple();
     setCompletion([]);
   }
 
   async function swap(nums, i, j) {
     [nums[j], nums[i]] = [nums[i], nums[j]];
     setRed([i, j]);
-    await sleep();
     setRed((prev) => []);
     await sleep();
   }
@@ -125,9 +126,9 @@ export default function FirstSection() {
     if (lo < hi) {
       let mid = Math.floor(lo + (hi - lo) / 2);
 
-      await merge_sort(lo, mid, data),
-        await merge_sort(mid + 1, hi, data),
-        await merge(lo, mid, hi, data);
+      await merge_sort(lo, mid, data);
+      await merge_sort(mid + 1, hi, data);
+      await merge(lo, mid, hi, data);
     }
   }
 
@@ -143,15 +144,16 @@ export default function FirstSection() {
   async function merge(left, mid, right, data) {
     let left_ind = left;
     let right_ind = mid + 1;
+    let temp = fill(left,right)
 
     setRed([left, right]);
-    setPink(fill(left, right));
+    setCompletion(prev => [...prev,...temp])
     await sleep();
 
     while (left_ind <= mid && right_ind <= right) {
       if (data[left_ind] <= data[right_ind]) {
         left_ind++;
-        setGreen(left_ind);
+        setBlue(left_ind);
         await sleep();
       } else {
         let value = data[right_ind];
@@ -178,18 +180,20 @@ export default function FirstSection() {
     for (let i = 0; i < data.length; i++) {
       let j = i - 1;
 
-      setGreen(i);
+      setPurple(i);
       setOrange(j);
       await sleep();
 
       let value = data[i];
       while (j >= 0 && data[j] >= value) {
         await swap(data, j, j + 1);
+        setRed([j, j + 1]);
         j--;
 
         setOrange(j);
         await sleep();
       }
+      setCompletion((prev) => [...prev, i]);
     }
     setArr([...data]);
   }
@@ -197,21 +201,22 @@ export default function FirstSection() {
   async function selectionSort(data) {
     for (let i = 0; i < data.length; i++) {
       let minInd = i;
-      setBlue(i);
+      setOrange(i);
       await sleep();
 
       for (let j = minInd + 1; j < data.length; j++) {
-        setGreen(j);
+        setBlue(j);
         await sleep();
 
         if (data[j] < data[minInd]) {
           minInd = j;
-          -setOrange(minInd);
+          setPurple(minInd);
           await sleep();
         }
       }
       await swap(data, minInd, i);
       setArr([...data]);
+      setCompletion((prev) => [...prev, i]);
       await sleep();
     }
   }
@@ -224,6 +229,7 @@ export default function FirstSection() {
         }
       }
       setArr([...data]);
+      setCompletion((prev) => [...prev, data.length - 1 - i]);
       await sleep();
     }
   }
@@ -255,6 +261,7 @@ export default function FirstSection() {
         green={green}
         blue={blue}
         orange={orange}
+        purple={purple}
         skyBlue={skyBlue}
         red={red}
         completion={completion}
