@@ -7,6 +7,7 @@ export default function BarChart({
   skyBlue,
   pink,
   blue,
+  completion,
   red,
 }) {
   return (
@@ -14,11 +15,12 @@ export default function BarChart({
       {data.map((value, index) => {
         let color = "black";
         if (red.includes(index)) color = "red";
+        else if(completion.includes(index)) color = "#73d673";
         else if (index == green) color = "#00f700";
         else if (index == orange) color = "orange";
         else if (index == blue) color = "blue";
         else if (pink.includes(index)) color = "pink";
-        else if (skyBlue.includes(index)) color = "blue";
+        else if (skyBlue.includes(index)) color = "#5eb9f5";
 
         return (
           <div

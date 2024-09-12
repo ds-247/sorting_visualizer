@@ -28,8 +28,9 @@ export default function FirstSection() {
   const [orange, setOrange] = useState(); // orange
   const [blue, setBlue] = useState(); // blue
   const [pink, setPink] = useState([]); // pink -- array
-  const [skyBlue, setSkyBlue] = useState([]); // pink -- array
-  const [algo, setAlgo] = useState("Merge");
+  const [skyBlue, setSkyBlue] = useState([]); // blue -- array
+  const [completion, setCompletion] = useState([]); // blue -- array
+  const [algo, setAlgo] = useState("Quick");
   const [arr, setArr] = useState(data);
   const [ms, setSpeed] = useState(350);
 
@@ -51,6 +52,7 @@ export default function FirstSection() {
     setBlue();
     setPink([]);
     setSkyBlue([]);
+    setCompletion([]);
   }
 
   async function swap(nums, i, j) {
@@ -69,7 +71,7 @@ export default function FirstSection() {
     if (algo === "Bubble") bubbleSort(arr);
     else if (algo === "Selection") selectionSort(arr);
     else if (algo === "Insertion") insertionSort(arr);
-    // else if (algo === "Quick") quick_sort(0, arr.length - 1, arr);
+    else if (algo === "Quick") quick_sort(0, arr.length - 1, arr);
     else if (algo === "Merge") merge_sort(0, arr.length - 1, arr);
 
     complete();
@@ -79,52 +81,53 @@ export default function FirstSection() {
     // set all states to initial and set every index to green
   }
 
-  // async function quick_sort(lo, hi, data) {
-  //   if (lo <= hi) {
-  //     let pivot_ind = await partition(lo, hi, data);
+  async function quick_sort(lo, hi, data) {
+    if (lo <= hi) {
+      let pivot_ind = await partition(lo, hi, data);
 
-  //     Promise.all([
-  //       await quick_sort(lo, pivot_ind - 1, data),
-  //       await quick_sort(pivot_ind + 1, hi, data),
-  //     ]);
-  //   }
-  // }
+      setCompletion((prev) => [...prev, pivot_ind]);
 
-  // async function partition(lo, hi, data) {
-  //   let pivot = lo;
-  //   let left = lo + 1;
-  //   let right = hi;
+      await quick_sort(lo, pivot_ind - 1, data);
+      await quick_sort(pivot_ind + 1, hi, data);
+    }
+  }
 
-  //   while (left <= right) {
-  //     while (left <= right && data[left] <= data[pivot]) {
-  //       left++;
-  //       setComp1(left);
-  //     }
-  //     while (left <= right && data[right] >= data[pivot]) {
-  //       right--;
+  async function partition(lo, hi, data) {
+    let pivot = lo;
+    let left = lo + 1;
+    let right = hi;
 
-  //       setComp2(right);
-  //     }
+    setBlue(pivot);
+    setSkyBlue([left, right]);
+    await sleep();
 
-  //     if (left < right) {
-  //       await swap(data, left, right);
-  //     }
-  //   }
+    while (left <= right) {
+      while (left <= right && data[left] <= data[pivot]) {
+        left++;
+      }
+      while (left <= right && data[right] >= data[pivot]) {
+        right--;
+      }
 
-  //   await swap(data, pivot, right);
+      if (left < right) {
+        await swap(data, left, right);
+      }
+    }
 
-  //   setArr([...data]);
+    await swap(data, pivot, right);
 
-  //   return right;
-  // }
+    setArr([...data]);
+
+    return right;
+  }
 
   async function merge_sort(lo, hi, data) {
     if (lo < hi) {
       let mid = Math.floor(lo + (hi - lo) / 2);
 
       await merge_sort(lo, mid, data),
-      await merge_sort(mid + 1, hi, data),
-      await merge(lo, mid, hi, data);
+        await merge_sort(mid + 1, hi, data),
+        await merge(lo, mid, hi, data);
     }
   }
 
@@ -254,6 +257,7 @@ export default function FirstSection() {
         orange={orange}
         skyBlue={skyBlue}
         red={red}
+        completion={completion}
         pink={pink}
       />
     </div>

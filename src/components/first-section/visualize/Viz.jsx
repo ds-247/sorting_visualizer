@@ -1,7 +1,16 @@
 import BarChart from "../../bar-chart/BarChart";
 import "./viz.scss";
 
-export default function Viz({ data, green, orange, pink, skyBlue, blue, red }) {
+export default function Viz({
+  data,
+  green,
+  orange,
+  completion,
+  pink,
+  skyBlue,
+  blue,
+  red,
+}) {
   return (
     <div className="viz">
       <BarChart
@@ -12,6 +21,7 @@ export default function Viz({ data, green, orange, pink, skyBlue, blue, red }) {
         blue={blue}
         skyBlue={skyBlue}
         pink={pink}
+        completion={completion}
       />
     </div>
   );
