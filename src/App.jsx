@@ -5,9 +5,9 @@ import "./App.scss";
 function App() {
   return (
     <div className="container">
-      <section>
+      {/* <section>
         <FirstSection />
-      </section>
+      </section> */}
       <section>
         <SecondSection />
       </section>
