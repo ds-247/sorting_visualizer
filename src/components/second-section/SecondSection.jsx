@@ -1,11 +1,10 @@
+import { useState } from "react";
 import Button from "../button/Button";
 import Input from "../input/Input";
 import Radio from "../radio/Radio";
 import Top from "../top/Top";
+import Droppable from "../draggable_section/Droppable";
 import "./second.scss";
-import Input from "../input/Input";
-import { useState } from "react";
-import Draggables from "../draggable_section/Droppable";
 
 export default function SecondSection() {
   const [size, setSize] = useState(10);
@@ -38,7 +37,7 @@ export default function SecondSection() {
         <Button value="Reset" onClick={handleReset} disable={false} />
           </Top>
           
-          <Draggables />
+          <Droppable />
     </div>
   );
 }

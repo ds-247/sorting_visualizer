@@ -1,11 +1,11 @@
 import Draggable from "./draggable/Draggable";
-import "./draggables.scss";
+import "./dropable.scss";
 
 const array = ["Merge Sort", "Quick Sort", "Selection Sort", "Insertion Sort", "Bubble Sort"];
 
-export default function Draggables () {
+export default function Droppable () {
     return (
-        <div className="draggables">
+        <div className="droppable">
             {array.map(algo => {
                return <Draggable />;
            })}
