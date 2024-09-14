@@ -7,12 +7,13 @@ import Droppable from "../draggable_section/Droppable";
 import "./second.scss";
 
 export default function SecondSection() {
-  const [size, setSize] = useState(10);
+  const [size, setSize] = useState();
   const [negative, setNegative] = useState(false);
 
   function handleAnalyze() {}
 
   function handleReset() {}
+
 
   function onSizeChange(size) {
     setSize(size);
@@ -35,9 +36,9 @@ export default function SecondSection() {
         />
         <Button value="Analyze" onClick={handleAnalyze} disable={false} />
         <Button value="Reset" onClick={handleReset} disable={false} />
-          </Top>
-          
-          <Droppable />
+      </Top>
+
+      <Droppable />
     </div>
   );
 }
