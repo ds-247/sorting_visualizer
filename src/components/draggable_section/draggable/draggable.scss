@@ -1,4 +1,11 @@
-.draggable{
-    color: white;
-    background-color: green;
+.draggable {
+  color: white;
+  background-color: #0eb600;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 4px 8px 0px 3px black;
+
+  &:active {
+    box-shadow: 4px 8px 0px 0px black;
+  }
 }

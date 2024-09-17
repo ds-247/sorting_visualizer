@@ -2,11 +2,11 @@ import { useState } from "react";
 import "./dropArea.scss";
 
 export default function DropArea({ onDrop}) {
+  const [showDrop, setShowDrop] = useState(false);
     
-    const [showDrop, setShowDrop] = useState(false);
     return (
         <div
-            className="drop-area"
+            className={showDrop ? "drop-area" : "hide"}
             onDragEnter={() => setShowDrop(true)}
             onDragLeave={() => setShowDrop(false)}
             onDrop={() => {

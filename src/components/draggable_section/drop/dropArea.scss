@@ -1,4 +1,14 @@
-.drop-area{
-    color: white;
-    border: 1px dotted white;
+.drop-area {
+  color: white;
+  border: 1px dotted white;
+  columns: #dcdcdc;
+  border-radius: 10px;
+  padding: 9px;
+  opacity: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.hide {
+  opacity: 0;
+  height: 0px;
 }
