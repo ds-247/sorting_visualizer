@@ -1,9 +1,36 @@
-function merge_sort(array) {
-  merge();
-  return;
+function merge_sort(array, lo, hi) {
+  if (lo < hi) {
+    let mid = Math.floor(lo + (hi - lo) / 2);
+    merge_sort(array, lo, mid);
+    merge_sort(array, mid + 1, hi);
+
+    merge(array, lo, mid, hi);
+  }
 }
 
-function merge() {}
+function merge(array, lo, mid, hi) {
+  let left_ind = lo;
+  let right_ind = mid + 1;
+
+  while (left_ind <= mid && right_ind <= hi) {
+    if (array[left_ind] <= array[right_ind]) {
+      left_ind++;
+    } else {
+      let value = array[right_ind];
+      let index = right_ind;
+
+      while (index > left_ind) {
+        array[index] = array[index - 1];
+        index--;
+      }
+
+      array[left_ind] = value;
+      left_ind++;
+      mid++;
+      right_ind++;
+    }
+  }
+}
 
 function quick_sort(array) {
   pivot();
@@ -47,11 +74,11 @@ function selection_sort(array) {
 
 function insertion_sort(array) {
   let temp_arr = [...array];
-  console.log("array initially in insertion sort ", temp_arr)
+  console.log("array initially in insertion sort ", temp_arr);
 
-  for (let i = 0; i < temp_arr.length; i++){
+  for (let i = 0; i < temp_arr.length; i++) {
     let value = temp_arr[i];
-    let j = i-1;
+    let j = i - 1;
 
     while (j >= 0 && temp_arr[j] >= value) {
       temp_arr[j + 1] = temp_arr[j];
@@ -61,7 +88,7 @@ function insertion_sort(array) {
     temp_arr[j + 1] = value;
   }
 
-  console.log("array finally in insertion sort ", temp_arr)
+  console.log("array finally in insertion sort ", temp_arr);
 }
 
 function swap(arr, i, j) {
@@ -73,7 +100,7 @@ function swap(arr, i, j) {
 export default function Sortings(array) {
   function MERGE() {
     let start = performance.now();
-    merge_sort(array);
+    merge_sort(array, 0, array.length - 1);
     let end = performance.now();
 
     return end - start;

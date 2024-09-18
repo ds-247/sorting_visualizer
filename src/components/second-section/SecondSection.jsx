@@ -27,7 +27,7 @@ export default function SecondSection() {
 
     const random = RandomArray.generateRandomArray(size);
     let temp_array = algos;
-    let temp_max = 100;
+    let temp_max = 5;
 
     const obj = Sortings(random);
 
@@ -52,7 +52,7 @@ export default function SecondSection() {
     temp_max = Math.max(temp_max, quick);
 
 
-    setMax(temp_max);
+    setMax(temp_max + 10);
     setAlgos(temp_array);
   }
 
