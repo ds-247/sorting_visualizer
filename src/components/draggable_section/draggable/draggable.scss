@@ -4,6 +4,8 @@
   padding: 10px;
   border-radius: 10px;
   box-shadow: 4px 8px 0px 3px black;
+  display: flex;
+  gap: 10px;
 
   &:active {
     box-shadow: 4px 8px 0px 0px black;
