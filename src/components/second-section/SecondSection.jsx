@@ -27,7 +27,7 @@ export default function SecondSection() {
 
     const random = RandomArray.generateRandomArray(size);
     let temp_array = algos;
-    let temp_max = 3;
+    let temp_max = 2;
 
     const obj = Sortings(random);
 
@@ -79,13 +79,13 @@ export default function SecondSection() {
     <div className="second">
       <Top>
         <Input value={size} onChange={onSizeChange} />
-        <Radio
+        {/* <Radio
           name="name"
           option="Negatives"
           checked={negative}
           disable={false}
           onChange={onNegativeChange}
-        />
+        /> */}
         <Button value="Analyze" onClick={handleAnalyze} disable={false} />
         <Button value="Reset" onClick={handleReset} disable={false} />
       </Top>

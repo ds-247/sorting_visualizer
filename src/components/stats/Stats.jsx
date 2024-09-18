@@ -2,7 +2,12 @@ import "./stats.scss";
 
 export default function Stats({ algo, max }) {
   // Assuming `algo.time` is a value between 0 and 100 representing percentage
-  const progressPercentage = (algo.time / max) * 100; // Ensure it stays between 0 and 100
+  const logTime = Math.log(algo.time);
+  const logMaxTime = Math.log(max);
+
+  // Calculate the fill percentage based on logarithmic values
+  const progressPercentage = (logTime / logMaxTime) * 100;
+  console.log(progressPercentage)
   const precision_time = algo.time.toFixed(2);
 
   return (
