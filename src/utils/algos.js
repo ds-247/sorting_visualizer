@@ -32,11 +32,33 @@ function merge(array, lo, mid, hi) {
   }
 }
 
-function quick_sort(array) {
-  pivot();
+function quick_sort(array, lo, hi) {
+  if (lo >= hi) return;
+
+  let pivot = partition(array, lo, hi);
+
+  quick_sort(array, lo, pivot - 1);
+  quick_sort(array, pivot + 1, hi);
 }
 
-function pivot() {}
+function partition(array, lo, hi) {
+  let pivot_elem = array[lo];
+  let left = lo + 1;
+  let right = hi;
+
+  while (left <= right) {
+    while (left <= right && array[left] <= pivot_elem) left++;
+    while (left <= right && array[right] >= pivot_elem) right--;
+
+    if (left < right) {
+      swap(array, left, right);
+    }
+  }
+
+  swap(array, lo, right);
+
+  return right;
+}
 
 function bubble_sort(array) {
   console.log("array initially in bubble sort ", array);
@@ -100,16 +122,24 @@ function swap(arr, i, j) {
 export default function Sortings(array) {
   function MERGE() {
     let start = performance.now();
-    merge_sort(array, 0, array.length - 1);
+    let temp_arr = [...array]
+    console.log("before sorting in merge sort", temp_arr);
+    merge_sort(temp_arr, 0, temp_arr.length - 1);
     let end = performance.now();
+
+    console.log("after sorting in merge sort", temp_arr)
 
     return end - start;
   }
 
   function QUICK() {
     let start = performance.now();
-    quick_sort(array);
+    let temp_arr = [...array];
+    console.log("before sorting in quick sort", temp_arr)
+    quick_sort(temp_arr, 0, temp_arr.length - 1);
     let end = performance.now();
+
+    console.log("after sorting in quick sort", temp_arr)
 
     return end - start;
   }

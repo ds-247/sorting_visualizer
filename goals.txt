@@ -15,3 +15,4 @@
 15. add all colors index for ease to understand
 16. change the drag and drop feature and implement using dnd react library
 17. correct the insertion sort implementation in visualizer section
+18. try to implement the async and await wala feature for smaller inputs as states doenst get changed
