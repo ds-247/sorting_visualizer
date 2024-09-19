@@ -8,11 +8,11 @@ import Sortings from "../../utils/algos.js";
 import "./second.scss";
 
 const data = [
-  { name: "Merge Sort", time: 0, complexity: "O(N_log(N))", color: "#3498db " },
-  { name: "Quick Sort", time: 0, complexity: "O(N_log(N))", color: "#2ecc71" },
-  { name: "Selection Sort", time: 0, complexity: "O(N^2)", color: "#f39c12" },
-  { name: "Insertion Sort", time: 0, complexity: "O(N^2)", color: "#9b59b6" },
-  { name: "Bubble Sort", time: 0, complexity: "O(N^2)", color: "#e74c3c" },
+  { id : "1", name: "Merge Sort", time: 0, complexity: "O(N_log(N))", color: "#3498db " },
+  { id : "2", name: "Quick Sort", time: 0, complexity: "O(N_log(N))", color: "#2ecc71" },
+  { id : "3", name: "Selection Sort", time: 0, complexity: "O(N^2)", color: "#f39c12" },
+  { id : "4", name: "Insertion Sort", time: 0, complexity: "O(N^2)", color: "#9b59b6" },
+  { id : "5", name: "Bubble Sort", time: 0, complexity: "O(N^2)", color: "#e74c3c" },
 ];
 
 export default function SecondSection() {
@@ -80,7 +80,7 @@ export default function SecondSection() {
         <Button value="Reset" onClick={handleReset} disable={false} />
       </Top>
 
-      <Droppable array={algos} max={max} />
+      <Droppable array={algos} max={max} setArray={setAlgos} />
     </div>
   );
 }

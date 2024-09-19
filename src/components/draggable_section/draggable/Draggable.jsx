@@ -3,14 +3,15 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import "./draggable.scss";
 
-export default function Draggable({ algo, max, index }) {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({index})
+export default function Draggable({ algo, max }) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: algo.id }); // Use algo.id for sortable
 
   const style = {
     backgroundColor: algo.color,
     transition,
-    transform: CSS.Transform.toString(transform)
-  }
+    transform: CSS.Transform.toString(transform),
+  };
 
   return (
     <div
