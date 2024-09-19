@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import "./radio.scss";
 
 export default function Radio({ name, checked, option, disable, onChange }) {
-
   function handleOptionChange() {
     // Toggle the checked state manually (like a checkbox)
     if (!disable) {
-      onChange(prev => !prev);
+      onChange((prev) => !prev);
     }
   }
 

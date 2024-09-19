@@ -7,12 +7,12 @@ export default function Stats({ algo, max }) {
 
   // Calculate the fill percentage based on logarithmic values
   const progressPercentage = max === 0 ? max : (logTime / logMaxTime) * 100;
-  const precision_time = algo.time.toFixed(0);
+  const precision_time = algo.time.toFixed(1);
 
   return (
     <div className="stats">
       <div className="progress" style={{ width: `${progressPercentage}%` }}>
-        {precision_time}
+        <p>{precision_time}</p>
       </div>
     </div>
   );

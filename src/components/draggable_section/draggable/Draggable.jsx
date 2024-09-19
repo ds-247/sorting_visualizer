@@ -5,7 +5,7 @@ import "./draggable.scss";
 
 export default function Draggable({ algo, max }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: algo.id }); // Use algo.id for sortable
+    useSortable({ id: algo.id });
 
   const style = {
     backgroundColor: algo.color,

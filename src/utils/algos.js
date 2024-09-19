@@ -122,12 +122,12 @@ function swap(arr, i, j) {
 export default function Sortings(array) {
   function MERGE() {
     let start = performance.now();
-    let temp_arr = [...array]
+    let temp_arr = [...array];
     console.log("before sorting in merge sort", temp_arr);
     merge_sort(temp_arr, 0, temp_arr.length - 1);
     let end = performance.now();
 
-    console.log("after sorting in merge sort", temp_arr)
+    console.log("after sorting in merge sort", temp_arr);
 
     return end - start;
   }
@@ -135,11 +135,11 @@ export default function Sortings(array) {
   function QUICK() {
     let start = performance.now();
     let temp_arr = [...array];
-    console.log("before sorting in quick sort", temp_arr)
+    console.log("before sorting in quick sort", temp_arr);
     quick_sort(temp_arr, 0, temp_arr.length - 1);
     let end = performance.now();
 
-    console.log("after sorting in quick sort", temp_arr)
+    console.log("after sorting in quick sort", temp_arr);
 
     return end - start;
   }

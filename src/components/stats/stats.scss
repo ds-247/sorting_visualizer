@@ -1,22 +1,25 @@
 .stats {
-  flex: 1; /* Full width of the container */
-  height: 30px; /* Height of the progress bar */
-  background-color: #e0e0e0; /* Background color for the container */
-  border-radius: 5px; /* Rounded corners for the container */
-  overflow: hidden; /* Hide overflow in case progress exceeds 100% */
+  flex: 1;
+  height: 30px;
+  background-color: #fe006947;
+  border-radius: 15px;
+  overflow: hidden;
   position: relative;
 
   .progress {
-  height: 100%; /* Full height of the container */
-  background-color: #76c7c0; /* Color of the progress bar */
-  transition: width 0.5s ease-in-out; /* Smooth transition effect */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px; /* Match the border radius of the container */
-}
-}
+    height: 100%;
+    background-color: #e0005d;
+    transition: width 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    border-radius: 15px;
 
-
+    p {
+      position: absolute;
+      left: 50%;
+    }
+  }
+}

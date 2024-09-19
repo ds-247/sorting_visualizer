@@ -8,23 +8,53 @@ import Sortings from "../../utils/algos.js";
 import "./second.scss";
 
 const data = [
-  { id : "1", name: "Merge Sort", time: 0, complexity: "O(N_log(N))", color: "#3498db " },
-  { id : "2", name: "Quick Sort", time: 0, complexity: "O(N_log(N))", color: "#2ecc71" },
-  { id : "3", name: "Selection Sort", time: 0, complexity: "O(N^2)", color: "#f39c12" },
-  { id : "4", name: "Insertion Sort", time: 0, complexity: "O(N^2)", color: "#9b59b6" },
-  { id : "5", name: "Bubble Sort", time: 0, complexity: "O(N^2)", color: "#e74c3c" },
+  {
+    id: "1",
+    name: "Merge Sort",
+    time: 0,
+    complexity: "O(N_log(N))",
+    color: "#2c2c2c ",
+  },
+  {
+    id: "2",
+    name: "Quick Sort",
+    time: 0,
+    complexity: "O(N_log(N))",
+    color: "#2c2c2c",
+  },
+  {
+    id: "3",
+    name: "Selection Sort",
+    time: 0,
+    complexity: "O(N^2)",
+    color: "#2c2c2c",
+  },
+  {
+    id: "4",
+    name: "Insertion Sort",
+    time: 0,
+    complexity: "O(N^2)",
+    color: "#2c2c2c",
+  },
+  {
+    id: "5",
+    name: "Bubble Sort",
+    time: 0,
+    complexity: "O(N^2)",
+    color: "#2c2c2c",
+  },
 ];
 
 export default function SecondSection() {
   const [max, setMax] = useState(0);
-  const [size, setSize] = useState(30000);
+  const [size, setSize] = useState(10000);
   const [algos, setAlgos] = useState(data);
 
   function handleAnalyze() {
     if (size <= 0) alert("Please enter size of the array :D ");
 
     const random = RandomArray.generateRandomArray(size);
-    let temp_array = algos.map(obj=>({...obj}));
+    let temp_array = algos.map((obj) => ({ ...obj }));
     let temp_max = 2;
 
     const obj = Sortings(random);
@@ -49,14 +79,13 @@ export default function SecondSection() {
     temp_array[1].time = quick;
     temp_max = Math.max(temp_max, quick);
 
-
     setMax(temp_max);
     setAlgos(temp_array);
   }
 
   function handleReset() {
-    setAlgos(data)
-    setMax(prev => 0)
+    setAlgos(data);
+    setMax((prev) => 0);
   }
 
   function onSizeChange(new_size) {
@@ -64,13 +93,11 @@ export default function SecondSection() {
     setSize(new_size);
 
     if (new_size > 50000) {
-      alert("Size should be less than 30000...")
-      setSize(prev => temp_size);
+      alert("Size should be less than 30000...");
+      setSize((prev) => temp_size);
       return;
     }
   }
-
-
 
   return (
     <div className="second">

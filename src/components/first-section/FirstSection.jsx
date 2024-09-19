@@ -87,12 +87,6 @@ export default function FirstSection() {
       await merge_sort(0, arr.length - 1, arr);
       setDisable((prev) => false);
     }
-
-    complete();
-  }
-
-  function complete() {
-    // set all states to initial and set every index to green
   }
 
   async function quick_sort(lo, hi, data) {
@@ -199,13 +193,14 @@ export default function FirstSection() {
 
       let value = data[i];
       while (j >= 0 && data[j] >= value) {
-        await swap(data, j, j + 1);
+        data[j + 1] = data[j];
         setRed([j, j + 1]);
         j--;
 
         setOrange(j);
         await sleep();
       }
+      data[j + 1] = value;
       setCompletion((prev) => [...prev, i]);
     }
     setArr([...data]);
