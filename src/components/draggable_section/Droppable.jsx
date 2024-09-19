@@ -15,7 +15,7 @@ export default function Droppable({ array, max }) {
           {array.map((algo, index) => {
             return (
               <React.Fragment key={index + " " + algo}>
-                <Draggable algo={algo} max={max} />
+                <Draggable algo={algo} max={max} index={index} />
               </React.Fragment>
             );
           })}
