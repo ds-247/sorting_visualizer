@@ -17,16 +17,15 @@ const data = [
 ];
 
 export default function SecondSection() {
-  const [max, setMax] = useState(1000);
+  const [max, setMax] = useState(0);
   const [size, setSize] = useState(30000);
-  const [negative, setNegative] = useState(false);
   const [algos, setAlgos] = useState(data);
 
   function handleAnalyze() {
     if (size <= 0) alert("Please enter size of the array :D ");
 
     const random = RandomArray.generateRandomArray(size);
-    let temp_array = algos;
+    let temp_array = algos.map(obj=>({...obj}));
     let temp_max = 2;
 
     const obj = Sortings(random);
@@ -56,7 +55,10 @@ export default function SecondSection() {
     setAlgos(temp_array);
   }
 
-  function handleReset() {}
+  function handleReset() {
+    setAlgos(data)
+    setMax(prev => 0)
+  }
 
   function onSizeChange(new_size) {
     const temp_size = size;
@@ -69,23 +71,12 @@ export default function SecondSection() {
     }
   }
 
-  function onNegativeChange() {
-    setNegative((prev) => !prev);
-  }
-
 
 
   return (
     <div className="second">
       <Top>
         <Input value={size} onChange={onSizeChange} />
-        {/* <Radio
-          name="name"
-          option="Negatives"
-          checked={negative}
-          disable={false}
-          onChange={onNegativeChange}
-        /> */}
         <Button value="Analyze" onClick={handleAnalyze} disable={false} />
         <Button value="Reset" onClick={handleReset} disable={false} />
       </Top>
