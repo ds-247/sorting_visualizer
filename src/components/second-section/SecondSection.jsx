@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "../button/Button";
 import Input from "../input/Input";
-import Radio from "../radio/Radio";
 import Top from "../top/Top";
 import Droppable from "../draggable_section/Droppable";
 import RandomArray from "../../utils/generate_random_array.js";
@@ -9,11 +8,11 @@ import Sortings from "../../utils/algos.js";
 import "./second.scss";
 
 const data = [
-  { name: "Merge Sort", time: 0, complexity: "O(N_log(N))" },
-  { name: "Quick Sort", time: 0, complexity: "O(N_log(N))" },
-  { name: "Selection Sort", time: 0, complexity: "O(N^2)" },
-  { name: "Insertion Sort", time: 0, complexity: "O(N^2)" },
-  { name: "Bubble Sort", time: 0, complexity: "O(N^2)" },
+  { name: "Merge Sort", time: 0, complexity: "O(N_log(N))", color: "#3498db " },
+  { name: "Quick Sort", time: 0, complexity: "O(N_log(N))", color: "#2ecc71" },
+  { name: "Selection Sort", time: 0, complexity: "O(N^2)", color: "#f39c12" },
+  { name: "Insertion Sort", time: 0, complexity: "O(N^2)", color: "#9b59b6" },
+  { name: "Bubble Sort", time: 0, complexity: "O(N^2)", color: "#e74c3c" },
 ];
 
 export default function SecondSection() {
@@ -81,7 +80,7 @@ export default function SecondSection() {
         <Button value="Reset" onClick={handleReset} disable={false} />
       </Top>
 
-      <Droppable array={algos} setArray={setAlgos} max={max} />
+      <Droppable array={algos} max={max} />
     </div>
   );
 }

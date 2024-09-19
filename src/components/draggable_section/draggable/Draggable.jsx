@@ -1,17 +1,16 @@
 import Stats from "../../stats/Stats";
 import "./draggable.scss";
 
-export default function Draggable ({ algo, max, setDrag, index }) {
+export default function Draggable ({ algo, max }) {
   return (
     <div
       className="draggable"
       draggable
-      onDragStart={() => setDrag(index)}
-      onDragEnd={() => setDrag(null)}
+      style={{ backgroundColor: algo.color }}
     >
       <div>{algo.name}</div>
-          <Stats algo={algo} max={max} />
-          <div>{algo.complexity}</div>
+      <Stats algo={algo} max={max} />
+      <div>{algo.complexity}</div>
     </div>
   );
 }

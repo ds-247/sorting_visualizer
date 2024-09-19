@@ -7,7 +7,6 @@ export default function Stats({ algo, max }) {
 
   // Calculate the fill percentage based on logarithmic values
   const progressPercentage = max === 0 ? max : (logTime / logMaxTime) * 100;
-  console.log(progressPercentage)
   const precision_time = algo.time.toFixed(0);
 
   return (
